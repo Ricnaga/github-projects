@@ -31,6 +31,7 @@ Após isso, só aguarde que será aberto um navegador com acesso ao sistema.
 - [ReactJS](https://pt-br.reactjs.org/)
 - [Javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 - [ECMAscript](https://www.ecma-international.org/publications/standards/Standard.htm)
+- [Typescript](https://www.typescriptlang.org/)
 
 ## <div align="center">Autor<div>
 Exercícios extraídos da [Rocketseat](https://rocketseat.com.br/), realizados e respondidos por minha pessoa :) \
