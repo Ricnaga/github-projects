@@ -1,11 +1,11 @@
-import styled, {css} from 'styled-components';
-import {shade} from 'polished';
+import styled, { css } from 'styled-components';
+import { shade } from 'polished';
 
-interface FormProps{
+interface FormProps {
     hasError: boolean;
 }
 
-export const Title = styled.h1 `
+export const Title = styled.h1`
     font-size: 48px;
     color:#3A3A3A;
 
@@ -31,8 +31,8 @@ export const Form = styled.form<FormProps>`
         border:2px solid #FFF;
         border-right:0;
         
-        ${(props) => 
-        props.hasError && 
+        ${(props) =>
+        props.hasError &&
         css`
             border-color:#C53030;
         `}

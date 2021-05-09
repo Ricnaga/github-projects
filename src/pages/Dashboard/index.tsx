@@ -1,16 +1,16 @@
-import React, {useState, useEffect, FormEvent} from "react";
-import {FiChevronRight} from 'react-icons/fi';
+import React, { useState, useEffect, FormEvent } from "react";
+import { FiChevronRight } from 'react-icons/fi';
 import api from '../../services/api';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import {Title, Form, Repositories, Error} from './styles'
+import { Title, Form, Repositories, Error } from './styles'
 import logoImg from '../../assets/logo.svg'
 import Repository from "../Repository";
 
-interface Repository{
+interface Repository {
     full_name: string;
-    description:string;
-    owner:{
+    description: string;
+    owner: {
         avatar_url: string;
         login: string;
     };
@@ -22,22 +22,22 @@ const Dashboard: React.FC = () => {
     const [repositories, setRepositories] = useState<Repository[]>(() => {
         const storagedRepositories = localStorage.getItem(
             '@GithubExplorer:repositories',
-            )
+        )
 
-        if(storagedRepositories){
+        if (storagedRepositories) {
             return JSON.parse(storagedRepositories)
-        }else{
+        } else {
             return [];
         }
     })
 
-    useEffect(() =>{
+    useEffect(() => {
         localStorage.setItem('@GithubExplorer:repositories', JSON.stringify(repositories))
     }, [repositories])
 
-    async function handleAddRepository(event: FormEvent<HTMLFormElement>): Promise<void>{
+    async function handleAddRepository(event: FormEvent<HTMLFormElement>): Promise<void> {
         event.preventDefault();
-        if(!newRepo){
+        if (!newRepo) {
             setInputError("Input owner/name of the repository")
         }
 
@@ -55,31 +55,31 @@ const Dashboard: React.FC = () => {
 
     return (
         <>
-            <img src={logoImg} alt="Github Explorer"/>
+            <img src={logoImg} alt="Github Explorer" />
             <Title>Explore repositórios no Github</Title>
 
             <Form hasError={!!inputError}
-            onSubmit={handleAddRepository}>
+                onSubmit={handleAddRepository}>
                 <input value={newRepo}
-                onChange={(e) => setNewRepo(e.target.value)}
-                placeholder="Digite o nome do respoitório"
+                    onChange={(e) => setNewRepo(e.target.value)}
+                    placeholder="Digite o nome do respoitório"
                 />
                 <button type="submit">Pesquisar</button>
             </Form>
-        {inputError && <Error>{inputError}</Error>}
+            {inputError && <Error>{inputError}</Error>}
             <Repositories>
                 {repositories.map(repository => (
-                    <Link  key={repository.full_name} to={`/repositories/${repository.full_name}`}>
-                        <img src={repository.owner.avatar_url} 
-                        alt={repository.owner.login}/>
+                    <Link key={repository.full_name} to={`/repositories/${repository.full_name}`}>
+                        <img src={repository.owner.avatar_url}
+                            alt={repository.owner.login} />
                         <div>
                             <strong>{repository.full_name}</strong>
                             <p>{repository.description}</p>
-                        </div>    
-                        <FiChevronRight size={20}/>
+                        </div>
+                        <FiChevronRight size={20} />
                     </Link>
                 ))}
-                 
+
             </Repositories>
         </>
     )
